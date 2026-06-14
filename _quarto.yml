@@ -1,0 +1,57 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Fredrick Ochuodho"
+
+  description: "Data Analyst | M&E Specialist | R | Power BI | SQL"
+
+  site-url: "https://fredrickochuodho.github.io"
+
+  navbar:
+    background: transparent
+    pinned: true
+
+    left:
+      - text: "Home"
+        href: index.qmd
+
+      - text: "Projects"
+        href: projects.qmd
+
+    right:
+      - icon: github
+        href: https://github.com/fredrick-ochuodho
+
+      - icon: linkedin
+        href: https://linkedin.com/in/fredrick-ochuodho
+
+      - icon: envelope
+        href: mailto:fochuodho7@gmail.com
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+
+    toc: false
+
+    smooth-scroll: true
+
+    css: assets/css/styles.css
+
+    include-in-header:
+      text: |
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    include-after-body:
+      text: |
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            AOS.init({ duration: 800, once: true });
+          });
+        </script>
+        <script src="assets/js/main.js"></script>

@@ -1,0 +1,57 @@
+---
+title: "Projects"
+page-layout: full
+---
+
+A showcase of dashboards, analysis, automation, and M&E systems.
+
+
+:::: {.grid}
+
+::: {.g-col-md-4 .project-card}
+### IOM Teleradiology Dashboard
+
+Power BI reporting system supporting global radiology operations.
+
+**Tools:** Power BI, SQL
+
+[View](#){.btn .btn-outline-primary}
+:::
+
+::: {.g-col-md-4 .project-card}
+### WHO TPM Reporting
+
+Monitoring & evaluation reporting for health interventions.
+
+**Tools:** Excel, Power BI, R
+
+[View](#){.btn .btn-outline-primary}
+:::
+
+::: {.g-col-md-4 .project-card}
+### Survey Analysis
+
+R-based exploratory data analysis of field surveys.
+
+**Tools:** R, ggplot2
+
+[View](#){.btn .btn-outline-primary}
+:::
+
+::::
+
+## 📈 More Projects
+
+:::: {.grid}
+
+::: {.g-col-md-6 .project-card}
+### SQL Reporting Pipeline
+Automated data cleaning and KPI generation system.
+:::
+
+::: {.g-col-md-6 .project-card}
+### Power Automate Reporting
+Automated email reporting workflows using Power BI outputs.
+:::
+
+::::

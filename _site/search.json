@@ -1,0 +1,135 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "I am a data analyst and monitoring & evaluation specialist with a background in applied statistics and computing.\nI focus on using data to improve decision-making in humanitarian and development programs."
+  },
+  {
+    "objectID": "about.html#who-i-am",
+    "href": "about.html#who-i-am",
+    "title": "About Me",
+    "section": "",
+    "text": "I am a data analyst and monitoring & evaluation specialist with a background in applied statistics and computing.\nI focus on using data to improve decision-making in humanitarian and development programs."
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About Me",
+    "section": "Experience",
+    "text": "Experience\n\nData Reporting Assistant – IOM Teleradiology Unit\nM&E Assistant – Ecumenical Pharmaceutical Networks\nField Officer – Innovations for Poverty Action"
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "About Me",
+    "section": "Skills",
+    "text": "Skills\n\nR Programming (data visualization, analysis)\nSQL & data querying\nPower BI & Tableau\nExcel & reporting automation\nSurvey tools: ODK, SurveyCTO"
+  },
+  {
+    "objectID": "services.html",
+    "href": "services.html",
+    "title": "Services",
+    "section": "",
+    "text": "I provide data and analytics services for organizations and individuals.\n\n\n\nPower BI / Tableau / R dashboards for monitoring and reporting.\n\n\n\nTransform messy datasets into analysis-ready systems.\n\n\n\nODK / SurveyCTO questionnaire design and data processing.\n\n\n\nHigh-quality visual storytelling for reports and publications."
+  },
+  {
+    "objectID": "services.html#dashboard-development",
+    "href": "services.html#dashboard-development",
+    "title": "Services",
+    "section": "",
+    "text": "Power BI / Tableau / R dashboards for monitoring and reporting."
+  },
+  {
+    "objectID": "services.html#data-cleaning-automation",
+    "href": "services.html#data-cleaning-automation",
+    "title": "Services",
+    "section": "",
+    "text": "Transform messy datasets into analysis-ready systems."
+  },
+  {
+    "objectID": "services.html#survey-design-analysis",
+    "href": "services.html#survey-design-analysis",
+    "title": "Services",
+    "section": "",
+    "text": "ODK / SurveyCTO questionnaire design and data processing."
+  },
+  {
+    "objectID": "services.html#data-visualization",
+    "href": "services.html#data-visualization",
+    "title": "Services",
+    "section": "",
+    "text": "High-quality visual storytelling for reports and publications."
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "Let’s Work Together\nI am available for: - Data analysis projects - Dashboard development - M&E system design - Consulting and reporting support\n\n📧 Email: your email here\n🔗 LinkedIn: your profile link\n📍 Based in Kenya"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Power BI dashboard tracking health indicators.\nView Project\n\n\n\nClean analysis of survey data using tidyverse.\nView Project"
+  },
+  {
+    "objectID": "projects.html#health-reporting-dashboard",
+    "href": "projects.html#health-reporting-dashboard",
+    "title": "Projects",
+    "section": "",
+    "text": "Built interactive reporting dashboard for health program monitoring\nTools: Power BI, SQL, Excel\nOutcome: Improved reporting speed and data visibility"
+  },
+  {
+    "objectID": "projects.html#survey-data-cleaning-analysis",
+    "href": "projects.html#survey-data-cleaning-analysis",
+    "title": "Projects",
+    "section": "",
+    "text": "Cleaned and analyzed large-scale survey datasets\nTools: R, SurveyCTO, ODK\nOutcome: Improved data quality and reduced reporting errors"
+  },
+  {
+    "objectID": "projects.html#ngo-performance-monitoring-system",
+    "href": "projects.html#ngo-performance-monitoring-system",
+    "title": "Projects",
+    "section": "",
+    "text": "Designed monitoring framework for program tracking\nTools: R, Excel, Power BI\nOutcome: Better decision-making support for stakeholders"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "I help NGOs, humanitarian organizations, and health programs transform data into actionable insights through dashboards, monitoring systems, and data storytelling.\n\n\n\n\n\nPower BI, Tableau, and R-based dashboards for decision-making.\n\n\n\nDesign and support M&E frameworks for program tracking and reporting.\n\n\n\nCleaning, analyzing, and automating reporting workflows using R and SQL.\n\n\n\n\n\n\nExperience in humanitarian and health data systems (IOM)\nSurvey design & implementation (ODK, SurveyCTO)\nReporting and analytics for program performance\nStrong background in statistics and computing\n\n\n\n\n\n\nHealth reporting dashboards\nNGO program monitoring systems\nData cleaning pipelines\nSurvey analysis projects\n\n👉 See all projects in the Projects section"
+  },
+  {
+    "objectID": "index.html#what-i-do",
+    "href": "index.html#what-i-do",
+    "title": "Home",
+    "section": "",
+    "text": "Power BI, Tableau, and R-based dashboards for decision-making.\n\n\n\nDesign and support M&E frameworks for program tracking and reporting.\n\n\n\nCleaning, analyzing, and automating reporting workflows using R and SQL."
+  },
+  {
+    "objectID": "index.html#impact-snapshot",
+    "href": "index.html#impact-snapshot",
+    "title": "Home",
+    "section": "",
+    "text": "Experience in humanitarian and health data systems (IOM)\nSurvey design & implementation (ODK, SurveyCTO)\nReporting and analytics for program performance\nStrong background in statistics and computing"
+  },
+  {
+    "objectID": "index.html#featured-work",
+    "href": "index.html#featured-work",
+    "title": "Home",
+    "section": "",
+    "text": "Health reporting dashboards\nNGO program monitoring systems\nData cleaning pipelines\nSurvey analysis projects\n\n👉 See all projects in the Projects section"
+  },
+  {
+    "objectID": "projects.html#projects",
+    "href": "projects.html#projects",
+    "title": "Projects",
+    "section": "",
+    "text": "Power BI dashboard tracking health indicators.\nView Project\n\n\n\nClean analysis of survey data using tidyverse.\nView Project"
+  }
+]

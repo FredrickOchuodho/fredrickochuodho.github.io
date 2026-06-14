@@ -1,0 +1,170 @@
+---
+title: "Fredrick Ochuodho"
+page-layout: full
+---
+
+I am a **<span id="typed-text"></span>**
+
+I design data systems, dashboards, and monitoring frameworks that turn complex data into actionable insights for humanitarian and development programs.
+
+[View Projects](projects.qmd){.btn .btn-primary}
+[Contact Me](#contact){.btn .btn-outline-primary}
+
+
+
+## About Me
+
+I am a **data professional** working across **humanitarian, health, and development sectors**, turning complex data into clear, actionable decisions.
+
+::: {.grid}
+
+::: {.g-col-6}
+
+
+#### **Data Analysis & Visualization**
+I turn raw datasets into clear insights and dashboards that support decision-making.
+
+**Tools:** R, Excel, Power BI, Tableau
+:::
+
+::: {.g-col-6}
+
+#### **Monitoring & Evaluation Systems**
+Designing frameworks that track performance, outcomes, and impact.
+
+**Tools:** Word, Excel, PowerPoint, 
+:::
+
+::: {.g-col-6}
+
+#### **Dashboard Development**
+Power BI + R-based reporting systems for real-time insights.
+
+**Tools:** Power BI, R
+
+:::
+
+::: {.g-col-6}
+
+#### **Survey Design & Deployment**
+Development of data collection systems for field research.
+
+**Tools:** KoboToolbox, ODK, SurveyCTO, CommCare, DHIS2,SurveyMonkey, Google Forms
+
+:::
+
+::: {.g-col-6}
+
+#### **Database Systems Development**
+Designing, structuring, and managing efficient data storage systems for analytics and reporting.
+
+**Tools:**  MS SQL Server (MSSQL), MySQL, PostgreSQL
+
+:::
+
+::: {.g-col-6}
+
+#### **Reporting Automation**
+Automating repetitive reporting workflows and data pipelines.
+
+**Tools:** Power Automate, Python, SQL
+
+:::
+
+:::
+
+
+
+### My Focus
+
+> **Turning raw data into decisions that improve programs, performance, and impact.**
+
+
+### Core Strengths
+
+<span class="skill-pill">Data Storytelling</span>
+<span class="skill-pill">Dashboard Design</span>
+<span class="skill-pill">M&E Systems</span>
+<span class="skill-pill">Automation</span>
+<span class="skill-pill">Field Data Collection</span>
+
+
+
+### How I Work
+
+<span class="skill-pill"> I simplify messy datasets into clear insights </span> 
+<span class="skill-pill"> I build systems that reduce manual reporting  </span>
+<span class="skill-pill"> I design visuals that actually drive decisions </span> 
+<span class="skill-pill"> I focus on speed, accuracy, and usability </span> 
+<span class="skill-pill"> I collaborate with professional to deeply understand the context of information. </span> 
+
+
+
+### Mindset
+
+I don’t just analyze data — I design **decision tools**.
+
+
+
+## Services
+
+::: {.grid}
+
+::: {.g-col-6}
+**Dashboard Development:** Power BI and R dashboards for monitoring KPIs and program performance.
+:::
+
+::: {.g-col-6}
+**Data Cleaning & Automation:** Transforming raw datasets into structured, analysis-ready systems.
+:::
+
+::: {.g-col-6}
+**Survey Design & Data Systems:** ODK / SurveyCTO questionnaires, validation, and field data workflows.
+:::
+
+::: {.g-col-6}
+**Data Visualization:** Clear, publication-ready visual storytelling for reports and stakeholders.
+:::
+
+:::
+
+## Featured Projects
+
+::: {.grid}
+
+::: {.g-col-6}
+#### **Health Dashboard**
+Power BI dashboard for monitoring health indicators.
+
+[View Project](projects.qmd)
+:::
+
+::: {.g-col-6}
+#### **Survey Analysis**
+R-based exploratory data analysis of field survey data.
+
+[View Project](projects.qmd)
+:::
+
+:::
+
+
+## 📬 Contact Me {#contact}
+
+If you'd like to collaborate or need support with data, dashboards, or M&E systems, **let’s connect**.
+
+<div class="contact-card">
+
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <input type="email" name="email" placeholder="Your Email" required>
+
+  <textarea name="message" placeholder="Your Message" required></textarea>
+
+  <button type="submit" class="send-message-btn"> Send Message</button>
+
+</form>
+
+</div>

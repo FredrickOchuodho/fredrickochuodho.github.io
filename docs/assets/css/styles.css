@@ -1,0 +1,468 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+.btn-primary {
+  border-radius: 8px;
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* Outline buttons */
+.btn-outline-primary {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+
+.quarto-dark {
+  --accent: #4ad1e0;
+  --accent-dark: #2aa6b9;
+}
+
+.quarto-dark h1,
+.quarto-dark h2,
+.quarto-dark h3 {
+  color: #eaf6f8;
+}
+
+.quarto-dark a {
+  color: var(--accent);
+}
+
+.quarto-dark strong {
+  color: var(--accent);
+}
+
+form input, form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
+#typed-text::after {
+  content: "|";
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#typed-text {
+  transition: opacity 0.2s ease-in-out;
+}
+
+
+.project-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  color: var(--text-color);
+}
+
+:root {
+  --card-bg: #ffffff;
+  --text-color: #1a1a1a;
+  --card-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+body.quarto-dark {
+  --card-bg: #444;
+  --text-color: #eaeaea;
+  --card-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+body.quarto-dark .project-card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== SAAS NAVBAR STYLE ===== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+
+.navbar-nav {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  padding: 8px 10px;
+}
+
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background:#14b8a6;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 60%;
+}
+
+
+.navbar {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(18px);
+}
+
+
+.quarto-dark .navbar {
+  background: rgba(20, 20, 20, 0.6) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root {
+  /* Base brand colors (safe on white) */
+  --accent: #2aa6b9;        /* soft teal-blue (main brand color) */
+  --accent-dark: #1b6f7a;   /* hover/darker */
+  --accent-soft: #e6f7fa;   /* light background tint */
+}
+
+h1, h2, h3 {
+  color: #1f2d3d; /* keep headings readable on white */
+}
+
+strong {
+  color: var(--accent-dark);
+}
+
+a {
+  color: var(--accent);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+h1, h2 {
+  text-shadow: 0 0 8px rgba(58, 160, 255, 0.25);
+}
+
+.quarto-dark {
+  --accent: #4ad1e0;
+  --accent-dark: #2aa6b9;
+}
+
+.quarto-dark h1,
+.quarto-dark h2,
+.quarto-dark h3 {
+  color: #eaf6f8;
+}
+
+.quarto-dark a {
+  color: var(--accent);
+}
+
+.quarto-dark strong {
+  color: var(--accent);
+}
+
+.quarto-dark a:hover {
+  text-shadow: 0 0 8px rgba(74, 209, 224, 0.4);
+}
+
+
+/* DARK MODE: Buttons */
+body.quarto-dark .btn,
+body.quarto-dark button,
+body.quarto-dark input[type="submit"] {
+  color: #4ad1e0 !important;
+}
+
+/* If you have a specific send button */
+body.quarto-dark .send-message-btn {
+  color: #4ad1e0 !important;
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+}
+
+.send-message-btn {
+  background: var(--accent);
+  color: white !important;
+  border: 1px solid rgba(20, 184, 166, 0.4);
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-weight: 500;
+}
+
+.quarto-color-scheme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quarto-color-scheme-toggle::after {
+  content: "Change theme";
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.15);
+  color: #14b8a6;
+}
+
+.btn {
+  border-radius: 10px !important;
+  transition: all 0.3s ease;
+}
+
+
+body.quarto-dark .btn,
+body.quarto-dark .btn-primary,
+body.quarto-dark .btn-outline-primary {
+  color: #eaeaea !important;
+  border-color: rgba(255,255,255,0.2) !important;
+}
+
+/* Ensure primary buttons stay visible */
+body.quarto-dark .btn-primary {
+  background-color: #14b8a6 !important;
+  border-color: #14b8a6 !important;
+  color: #0b0b0b !important;
+}
+
+/* Hover visibility fix */
+body.quarto-dark .btn-primary:hover {
+  background-color: #0d9488 !important;
+  border-color: #0d9488 !important;
+  color: white !important;
+}
+
+
+
+/* ===== GLASSMORPHISM DESIGN TOKENS ===== */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --text-color: #1a1a1a;
+  --accent: #14b8a6;
+}
+
+body.quarto-dark {
+  --glass-bg: rgba(20, 20, 20, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --text-color: #eaeaea;
+  --accent: #14b8a6;
+}
+
+
+.skill-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 4px 6px 4px 0;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.25);
+  color: var(--text-color);
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.skill-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(20, 184, 166, 0.2);
+}
+
+
+h1 img, h2 img, h3 img {
+  vertical-align: middle;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+
+/* GRID SPACING */
+.grid {
+  gap: 10px;
+}
+
+/* GLASS FEATURE CARDS */
+.g-col-6 {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 18px;
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.g-col-6:hover {
+  transform: translateY(-6px);
+  border-color: rgba(20, 184, 166, 0.3);
+  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
+}
+
+/* ICON STYLING */
+.g-col-6 img {
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+
+/* SERVICES GRID CARDS */
+.g-col-6 {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT (important for "lively feel") */
+.g-col-6:hover {
+  transform: translateY(-6px);
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
+}
+
+/* ICON STYLING */
+.g-col-6 h3 {
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.g-col-6 p {
+  opacity: 0.85;
+}
+
+/* OPTIONAL: ICON SPACING LOOK */
+.g-col-6 h3::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
+}
+
+
+
+/* CONTACT WRAPPER */
+.contact-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px;
+  border-radius: 18px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+}
+
+/* INPUT FIELDS */
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-color);
+  backdrop-filter: blur(8px);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* FOCUS STATE (VERY IMPORTANT UX FIX) */
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+}
+
+/* TEXTAREA SIZE */
+.contact-card textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* LIGHT MODE placeholder (fix visibility) */
+.contact-card input::placeholder,
+.contact-card textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
+  opacity: 1;
+}
+
+/* DARK MODE placeholder */
+body.quarto-dark .contact-card input::placeholder,
+body.quarto-dark .contact-card textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1;
+}
+
+body {
+  font-family: Cambria, "Times New Roman", Times, serif;
+  line-height: 1.6;
+}
