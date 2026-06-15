@@ -1,17 +1,31 @@
 [
   {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Projects",
+    "objectID": "projects/who_tpm/index.html",
+    "href": "projects/who_tpm/index.html",
+    "title": "WHO TPM Report",
     "section": "",
-    "text": "A showcase of dashboards, analysis, automation, and M&E systems."
+    "text": "Top Back"
   },
   {
-    "objectID": "projects.html#more-projects",
-    "href": "projects.html#more-projects",
+    "objectID": "projects/sql_pipeline/index.html",
+    "href": "projects/sql_pipeline/index.html",
+    "title": "SQL Data Pipeline",
+    "section": "",
+    "text": "Top Back"
+  },
+  {
+    "objectID": "projects/power_automate/index.html",
+    "href": "projects/power_automate/index.html",
+    "title": "Power Automate",
+    "section": "",
+    "text": "Top Back"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
     "title": "Projects",
-    "section": "📈 More Projects",
-    "text": "📈 More Projects\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs."
+    "section": "",
+    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nWHO TPM Reporting\nMonitoring & evaluation reporting for health interventions.\nTools: Excel, Power BI, R\nView\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nView\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
   },
   {
     "objectID": "index.html",
@@ -25,7 +39,7 @@
     "href": "index.html#about-me",
     "title": "Fredrick Ochuodho",
     "section": "About Me",
-    "text": "About Me\nI am a data professional working across humanitarian, health, and development sectors, turning complex data into clear, actionable decisions.\n\n\nData Analysis & Visualization\nI turn raw datasets into clear insights and dashboards that support decision-making.\nTools: R, Excel, Power BI, Tableau\n\n\nMonitoring & Evaluation Systems\nDesigning frameworks that track performance, outcomes, and impact.\nTools: Word, Excel, PowerPoint,\n\n\nDashboard Development\nPower BI + R-based reporting systems for real-time insights.\nTools: Power BI, R\n\n\nSurvey Design & Deployment\nDevelopment of data collection systems for field research.\nTools: KoboToolbox, ODK, SurveyCTO, CommCare, DHIS2,SurveyMonkey, Google Forms\n\n\nDatabase Systems Development\nDesigning, structuring, and managing efficient data storage systems for analytics and reporting.\nTools: MS SQL Server (MSSQL), MySQL, PostgreSQL\n\n\nReporting Automation\nAutomating repetitive reporting workflows and data pipelines.\nTools: Power Automate, Python, SQL\n\n\n\nMy Focus\n\nTurning raw data into decisions that improve programs, performance, and impact.\n\n\n\nCore Strengths\nData Storytelling Dashboard Design M&E Systems Automation Field Data Collection\n\n\nHow I Work\n I simplify messy datasets into clear insights   I build systems that reduce manual reporting   I design visuals that actually drive decisions   I focus on speed, accuracy, and usability   I collaborate with professional to deeply understand the context of information. \n\n\nMindset\nI don’t just analyze data — I design decision tools."
+    "text": "About Me\nI am a data professional working across humanitarian, health, and development sectors, turning complex data into clear, actionable decisions.\n\n\nData Analysis & Visualization\nI turn raw datasets into clear insights and dashboards that support decision-making.\nTools: R, Excel, Power BI, Tableau\n\n\nMonitoring & Evaluation Systems\nDesigning frameworks that track performance, outcomes, and impact.\nTools: Word, Excel, PowerPoint,\n\n\nDashboard Development\nPower BI + R-based reporting systems for real-time insights.\nTools: Power BI, R\n\n\nSurvey Design & Deployment\nDevelopment of data collection systems for field research.\nTools: KoboToolbox, ODK, SurveyCTO, CommCare, DHIS2,SurveyMonkey, Google Forms\n\n\nDatabase Systems Development\nDesigning, structuring, and managing efficient data storage systems for analytics and reporting.\nTools: MS SQL Server (MSSQL), MySQL, PostgreSQL\n\n\nReporting Automation\nAutomating repetitive reporting workflows and data pipelines.\nTools: Power Automate, Python, SQL\n\n\n\nMy Focus\n\nTurning raw data into decisions that improve programs, performance, and impact.\n\n\n\nCore Strengths\nData Storytelling Dashboard Design M&E Systems Automation Field Data Collection\n\n\nHow I Work\nI simplify messy datasets into clear insights I build systems that reduce manual reporting I design visuals that actually drive decisions I focus on speed, accuracy, and usability I collaborate with professional to deeply understand the context of information.\n\n\nMindset\nI don’t just analyze data — I design decision tools."
   },
   {
     "objectID": "index.html#services",
@@ -46,6 +60,27 @@
     "href": "index.html#contact",
     "title": "Fredrick Ochuodho",
     "section": "📬 Contact Me",
-    "text": "📬 Contact Me\nIf you’d like to collaborate or need support with data, dashboards, or M&E systems, let’s connect.\n\n\n\n\n\n Send Message"
+    "text": "📬 Contact Me\nIf you’d like to collaborate or need support with data, dashboards, or M&E systems, let’s connect.\n\n\n\n\n\n\nSend Message"
+  },
+  {
+    "objectID": "projects/powerbi/index.html",
+    "href": "projects/powerbi/index.html",
+    "title": "Health Dashboard",
+    "section": "",
+    "text": "Top Back"
+  },
+  {
+    "objectID": "projects/shiny_dashboard/index.html",
+    "href": "projects/shiny_dashboard/index.html",
+    "title": "Shiny Dashboard",
+    "section": "",
+    "text": "Top Back"
+  },
+  {
+    "objectID": "projects/survey_analysis/index.html",
+    "href": "projects/survey_analysis/index.html",
+    "title": "Survey Analysis",
+    "section": "",
+    "text": "Top Back"
   }
 ]
