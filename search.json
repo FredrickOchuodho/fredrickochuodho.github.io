@@ -25,7 +25,7 @@
     "href": "projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nWHO TPM Reporting\nMonitoring & evaluation reporting for health interventions.\nTools: Excel, Power BI, R\nView\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nView\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
+    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nWHO TPM Reporting\nMonitoring & evaluation reporting for health interventions.\nTools: Excel, Power BI, R\nView\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nTools: MSSQL, MySQL, PostgreSQL\nView\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nTools: Power Automate, Power BI\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
   },
   {
     "objectID": "index.html",
