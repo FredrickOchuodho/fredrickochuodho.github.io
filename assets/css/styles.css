@@ -466,3 +466,16 @@ body {
   font-family: Cambria, "Times New Roman", Times, serif;
   line-height: 1.6;
 }
+
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
