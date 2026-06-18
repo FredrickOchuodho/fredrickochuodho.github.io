@@ -1,31 +1,31 @@
 [
   {
-    "objectID": "projects/who_tpm/index.html",
-    "href": "projects/who_tpm/index.html",
-    "title": "WHO TPM Report",
+    "objectID": "projects/survey_analysis/index.html",
+    "href": "projects/survey_analysis/index.html",
+    "title": "Survey Analysis",
     "section": "",
     "text": "Top Back"
   },
   {
-    "objectID": "projects/sql_pipeline/index.html",
-    "href": "projects/sql_pipeline/index.html",
-    "title": "SQL Data Pipeline",
+    "objectID": "projects/shiny_dashboard/index.html",
+    "href": "projects/shiny_dashboard/index.html",
+    "title": "Shiny Dashboard",
     "section": "",
     "text": "Top Back"
   },
   {
-    "objectID": "projects/power_automate/index.html",
-    "href": "projects/power_automate/index.html",
-    "title": "Power Automate",
+    "objectID": "projects/powerbi/index.html",
+    "href": "projects/powerbi/index.html",
+    "title": "Health Dashboard",
     "section": "",
     "text": "Top Back"
   },
   {
-    "objectID": "projects/index.html",
-    "href": "projects/index.html",
-    "title": "Projects",
+    "objectID": "projects/disease_modeling/index.html",
+    "href": "projects/disease_modeling/index.html",
+    "title": "Infectious Disease Modeling",
     "section": "",
-    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nWHO TPM Reporting\nMonitoring & evaluation reporting for health interventions.\nTools: Excel, Power BI, R\nView\n\n\n\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nTools: MSSQL, MySQL, PostgreSQL\nView\n\n\n\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nTools: Power Automate, Power BI\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
+    "text": "SEIIIR Model\nThis model is a complex extension of the standard SEIR (Susceptible-Exposed-Infectious-Recovered) model, designed to handle diseases with multiple infection pathways (acute vs. chronic), treatment mechanisms, and variable recovery rates.\n\n\n\nFig 1: SEIIIR Model\n\n\nThe model describes the progression of individuals from susceptibility to exposure after contact with infectious persons. Exposed individuals either become asymptomatic infectious or confirmed infectious cases. Asymptomatic individuals may recover directly or progress to confirmed infection. Confirmed infectious individuals undergo treatment before eventually recovering.\n1. Model Compartments\n\nS → Susceptible individuals\nE → Exposed individuals (infected but not yet infectious)\nIₐ → Asymptomatic infectious individuals\nI꜀ → Confirmed/symptomatic infectious individuals\nIₜ → Treated or isolated infectious individuals\nR → Recovered individuals\n\n2. Model Assumptions \n\nPopulation & Demographic Assumptions:\n\n\nClosed System: The total population size N remains completely constant over the simulation period. There are no natural births, natural deaths, or migration flows entering or leaving the system.\nHomogeneous Mixing: The population mixes uniformly. Every susceptible individual S has an equal probability of coming into contact with any infectious individual I_A or I_C.\n\n\nTransmission & Disease Flow Assumptions:\n\n\nAsymptomatic Path: When exposed individuals E transition out of latency, only a fraction sigma develop symptoms. The remaining fraction 1 - sigma enter the asymptomatic carrier phase I_A.\nInfectivity Limits: Transmission only occurs via the rate lambda . Individuals in the latent phase E, treatment phase I_T, or recovered phase R are completely non-infectious; only I_A and I_C spread the disease.\nNo Re-infection: Recovery provides permanent, lifelong immunity. Individuals transitioning into the Recovered R compartment stay there permanently and can never revert back to Susceptible S.\nZero Disease-Induced Mortality: The pathogen itself is non-fatal. Every single infected individual eventually exits into the Recovered R phase via either treatment recovery gamma or natural asymptomatic recovery delta.\n\n\nPublic Health & Testing Assumptions:\n\n\nNo Direct Testing from Exposure: Exposed individuals E cannot be identified by surveillance. They must become active asymptomatic spreaders I_A before they can test positive and transition to the confirmed phase I_C at rate omega.\nMandatory Isolation Cascade: Confirmed individuals I_C do not recover on their own within that compartment. They are forced to transition into isolation or treatment I_T at rate eta before they are allowed to recover.\n\n3. Model Parameter Symbols and Meaning\n\nlambda - Force of infection (Rate at which susceptible individuals become infected)\nepsilon - Progression/incubation rate (Rate at which exposed individuals become infectious)\nsigma - symptomatic proportion (Fraction of exposed individuals who become symptomatic)\n(1 - sigma) - Asymptomatic proportion (Fraction of exposed individuals who become asymptomatic)\nomega - Detection/ Progression rate (Rate at which asymptomatic individuals become confirmed infectious)\neta - Treatment/Isolation (Rate at which confirmed infectious individuals enter treatment/isolation)\ngamma - Recovery rate (Rate at which treated individuals recover)\ndelta - Asymptomatic recovery rate (Rate at which asymptomatic individuals recover)\n\n4. Model ODE System\n\nSusceptible Population: dS/dt = -(lambda)S(I_A +I_C)/N\nExposed Population dE/dt = (lambda)S(I_A +I_C)/N - (epsilon)E\nAsymptomatic Infectious Population:\ndI_A/dt = (1-sigma)(epsilon) E - [(omega) + (delta)]I_A\nConfirmed/Symptomatic Infectious Population: dI_C/dt = (sigma)(epsilon)E + (omega)I_A - (eta)I_C\nTreated/Isolated Infectious Population: dI_T/dt = (eta) I_C +(omega)I_A - (gamma)I_T\nRecovered Population: dR/dt = (delta)I_A + (gamma) I_T\n\n\n\nModel Implementation in R\n1. Loading the required packages\n\n\nCode\npacman:: p_load(\n  deSolve,    # For solving ordinal differential equations\n  ggplot2,    # For graphical work\n  reshape     # For converting the data format\n)\n\n\n2. Defining the Initial State\n\n\nCode\nN &lt;- 100000  # Total population\n\nE &lt;-  10  # small number of exposed individuals \nI_A &lt;- 5  # small number of asymptomatic carriers \nI_C &lt;- 2  # small number of confirmed infectious \nI_T &lt;- 0  # no one starts treatment/isolation\nR &lt;- 0    # no one starts recovered/immune yet\nS &lt;- N - (E + I_A + I_C + I_T + R) # Calculation of susceptible population\n\n\n\ninitial_state &lt;- c( \n  S = S,\n  E = E, \n  I_A = I_A, \n  I_C = I_C, \n  I_T = I_T,\n  R = R\n)\n\ntimes &lt;- seq(0, 365*10, by = 1)\n\n\n3. Setting the Parameters \n\n\nCode\nparameters &lt;- c(\n  lambda = 0.33,   # Rate at which susceptible individuals become infected\n  epsilon = 1/50,  # Rate at which exposed individuals become infectious\n  sigma = 0.08,    # Fraction of exposed individuals who become symptomatic\n  \n  # Calculated using: 1/[average days to become confirmed]\n  \n  omega = 1/4 ,    # Rate at which asymptomatic individuals become confirmed infectious\n  \n  # Calculated using: 1/[average days to enta treatment]\n  eta = 1/1.5,      # Rate at which confirmed infectious individuals enter treatment/isolation\n  gamma = 1/15,    # Rate at which treated individuals recover\n  \n  # Calculated using; 1/[average days to recover  naturally]\n  delta = 1/10     # Rate at which asymptomatic individuals recover\n)\n\n# N/B: the following have been provided for this modeling session \n# S = Susceptible, E = Exposed, I = chronic infection, I = acute infection, I = treated, R = recovered.\n# Some parameter values relating to an epidemic in an area \"region A\".\n# ε (epsilon) = 1/50 days\n# σ (sigma) = 0.08\n# γ (gamma) = 1/15 days\n# Transmission parameter β (beta) = 0.33 days\n\n\n\n\nCode\nseiar_model &lt;- function(time, state, parameters) {\n  with(as.list(c(state, parameters)), {\n    \n    # This prevents the numbers from overshooting and breaking the solver\n    N &lt;- S + E + I_A + I_C + I_T + R\n    \n    # 2. CORRECTED TRANSMISSION (Divided by N)\n    # This keeps the daily infection pool bounded safely between 0 and N\n    infectious_pressure &lt;- (lambda * S * (I_A + I_C)) / N\n    \n    # 3. DIFFERENTIAL EQUATIONS\n    dS   &lt;- -infectious_pressure\n    dE   &lt;- infectious_pressure - (epsilon * E)\n    dI_A &lt;- ((1 - sigma) * epsilon * E) - (omega * I_A) - (delta * I_A)\n    dI_C &lt;- (sigma * epsilon * E) - (eta * I_C)\n    dI_T &lt;- (eta * I_C) + (omega * I_A) - (gamma * I_T)\n    dR   &lt;- (delta * I_A) + (gamma * I_T)\n    \n    return(list(c(dS, dE, dI_A, dI_C, dI_T, dR)))\n  })\n}\n\n\n\n\nCode\nseiar_output &lt;-  ode(\n  y = initial_state,\n  times = times,\n  func = seiar_model,\n  parms = parameters,\n  method = \"lsoda\"\n)\n\nseiar_output &lt;- as.data.frame(seiar_output)\n\n\n\n\nCode\nseiar_output_long&lt;-melt(data = seiar_output, id.vars = \"time\"  )\nhead(seiar_output_long)\n\n\n  time variable    value\n1    0        S 99983.00\n2    1        S 99981.10\n3    2        S 99979.78\n4    3        S 99978.83\n5    4        S 99978.12\n6    5        S 99977.55\n\n\n\n\nCode\np &lt;- ggplot(seiar_output)\n\n\np + geom_line(aes(time, S ), col=\"blue\")+theme_bw()\n\n\n\n\n\n\n\n\n\nCode\np + geom_line(aes(time, E ), col=\"red\")+theme_bw()\n\n\n\n\n\n\n\n\n\nCode\np + geom_line(aes(time, R ), col=\"pink\")+theme_bw()\n\n\n\n\n\n\n\n\n\nCode\np + geom_line(aes(time, I_A ), col=\"orange\")+theme_bw()\n\n\n\n\n\n\n\n\n\nCode\np + geom_line(aes(time, I_C ), col= \"purple\")+theme_bw()\n\n\n\n\n\n\n\n\n\nCode\np + geom_line(aes(time, I_T ), col= \"steelblue\")+theme_bw()\n\n\n\n\n\n\n\n\n\nTop Back"
   },
   {
     "objectID": "index.html",
@@ -63,23 +63,23 @@
     "text": "📬 Contact Me\nIf you’d like to collaborate or need support with data, dashboards, or M&E systems, let’s connect.\n\n\n\n\n\n\nSend Message"
   },
   {
-    "objectID": "projects/powerbi/index.html",
-    "href": "projects/powerbi/index.html",
-    "title": "Health Dashboard",
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nInfectious Disease Modeling\nThis is a mathematical simulations to predict pathogen spread and evaluate control strategies.\nTools: R\nView\n\n\n\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nTools: MSSQL, MySQL, PostgreSQL\nView\n\n\n\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nTools: Power Automate, Power BI\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
+  },
+  {
+    "objectID": "projects/power_automate/index.html",
+    "href": "projects/power_automate/index.html",
+    "title": "Power Automate",
     "section": "",
     "text": "Top Back"
   },
   {
-    "objectID": "projects/shiny_dashboard/index.html",
-    "href": "projects/shiny_dashboard/index.html",
-    "title": "Shiny Dashboard",
-    "section": "",
-    "text": "Top Back"
-  },
-  {
-    "objectID": "projects/survey_analysis/index.html",
-    "href": "projects/survey_analysis/index.html",
-    "title": "Survey Analysis",
+    "objectID": "projects/sql_pipeline/index.html",
+    "href": "projects/sql_pipeline/index.html",
+    "title": "SQL Data Pipeline",
     "section": "",
     "text": "Top Back"
   }

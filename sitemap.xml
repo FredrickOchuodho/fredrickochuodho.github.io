@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fredrickochuodho.github.io/projects/who_tpm/index.html</loc>
-    <lastmod>2026-06-15T14:24:34.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fredrickochuodho.github.io/projects/sql_pipeline/index.html</loc>
-    <lastmod>2026-06-15T14:24:46.817Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fredrickochuodho.github.io/projects/power_automate/index.html</loc>
-    <lastmod>2026-06-15T14:23:31.467Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fredrickochuodho.github.io/projects/index.html</loc>
-    <lastmod>2026-06-16T09:02:55.909Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fredrickochuodho.github.io/index.html</loc>
-    <lastmod>2026-06-15T14:26:21.691Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fredrickochuodho.github.io/projects/powerbi/index.html</loc>
-    <lastmod>2026-06-15T14:26:50.781Z</lastmod>
+    <loc>https://fredrickochuodho.github.io/projects/survey_analysis/index.html</loc>
+    <lastmod>2026-06-15T14:24:49.506Z</lastmod>
   </url>
   <url>
     <loc>https://fredrickochuodho.github.io/projects/shiny_dashboard/index.html</loc>
     <lastmod>2026-06-15T14:24:44.107Z</lastmod>
   </url>
   <url>
-    <loc>https://fredrickochuodho.github.io/projects/survey_analysis/index.html</loc>
-    <lastmod>2026-06-15T14:24:49.506Z</lastmod>
+    <loc>https://fredrickochuodho.github.io/projects/powerbi/index.html</loc>
+    <lastmod>2026-06-15T14:26:50.781Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fredrickochuodho.github.io/projects/disease_modeling/index.html</loc>
+    <lastmod>2026-06-18T11:45:16.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fredrickochuodho.github.io/index.html</loc>
+    <lastmod>2026-06-15T14:26:21.691Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fredrickochuodho.github.io/projects/index.html</loc>
+    <lastmod>2026-06-18T11:13:41.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fredrickochuodho.github.io/projects/power_automate/index.html</loc>
+    <lastmod>2026-06-15T14:23:31.467Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fredrickochuodho.github.io/projects/sql_pipeline/index.html</loc>
+    <lastmod>2026-06-15T14:24:46.817Z</lastmod>
   </url>
 </urlset>

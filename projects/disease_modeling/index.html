@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>WHO TPM Report – Fredrick Ochuodho</title>
+<title>Infectious Disease Modeling – Fredrick Ochuodho</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -303,7 +338,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">WHO TPM Report</h1>
+<h1 class="title">Infectious Disease Modeling</h1>
 </div>
 
 
@@ -320,9 +355,272 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="seiiir-model" class="level3">
+<h3 class="anchored" data-anchor-id="seiiir-model">SEIIIR Model</h3>
+<p>This model is a complex extension of the standard SEIR (Susceptible-Exposed-Infectious-Recovered) model, designed to handle diseases with multiple infection pathways (acute vs.&nbsp;chronic), treatment mechanisms, and variable recovery rates.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/seiiir_model_flowchart.png" class="img-fluid figure-img"></p>
+<figcaption>Fig 1: SEIIIR Model</figcaption>
+</figure>
+</div>
+<p>The model describes the progression of individuals from susceptibility to exposure after contact with infectious persons. Exposed individuals either become asymptomatic infectious or confirmed infectious cases. Asymptomatic individuals may recover directly or progress to confirmed infection. Confirmed infectious individuals undergo treatment before eventually recovering.</p>
+<p><strong>1. Model Compartments</strong></p>
+<ul>
+<li>S → Susceptible individuals</li>
+<li>E → Exposed individuals (infected but not yet infectious)</li>
+<li>Iₐ → Asymptomatic infectious individuals</li>
+<li>I꜀ → Confirmed/symptomatic infectious individuals</li>
+<li>Iₜ → Treated or isolated infectious individuals</li>
+<li>R → Recovered individuals</li>
+</ul>
+<p><strong>2. Model Assumptions </strong></p>
+<ol type="1">
+<li>Population &amp; Demographic Assumptions:</li>
+</ol>
+<ul>
+<li>Closed System: The total population size <code>N</code> remains completely constant over the simulation period. There are no natural births, natural deaths, or migration flows entering or leaving the system.</li>
+<li>Homogeneous Mixing: The population mixes uniformly. Every susceptible individual <code>S</code> has an equal probability of coming into contact with any infectious individual <code>I_A</code> or <code>I_C</code>.</li>
+</ul>
+<ol start="2" type="1">
+<li>Transmission &amp; Disease Flow Assumptions:</li>
+</ol>
+<ul>
+<li>Asymptomatic Path: When exposed individuals <code>E</code> transition out of latency, only a fraction <code>sigma</code> develop symptoms. The remaining fraction <code>1 - sigma</code> enter the asymptomatic carrier phase <code>I_A</code>.</li>
+<li>Infectivity Limits: Transmission only occurs via the rate <code>lambda</code> . Individuals in the latent phase <code>E</code>, treatment phase <code>I_T</code>, or recovered phase <code>R</code> are completely non-infectious; only <code>I_A</code> and <code>I_C</code> spread the disease.</li>
+<li>No Re-infection: Recovery provides permanent, lifelong immunity. Individuals transitioning into the Recovered <code>R</code> compartment stay there permanently and can never revert back to Susceptible <code>S</code>.</li>
+<li>Zero Disease-Induced Mortality: The pathogen itself is non-fatal. Every single infected individual eventually exits into the Recovered <code>R</code> phase via either treatment recovery <code>gamma</code> or natural asymptomatic recovery <code>delta</code>.</li>
+</ul>
+<ol start="3" type="1">
+<li>Public Health &amp; Testing Assumptions:</li>
+</ol>
+<ul>
+<li>No Direct Testing from Exposure: Exposed individuals <code>E</code> cannot be identified by surveillance. They must become active asymptomatic spreaders <code>I_A</code> before they can test positive and transition to the confirmed phase <code>I_C</code> at rate <code>omega</code>.</li>
+<li>Mandatory Isolation Cascade: Confirmed individuals <code>I_C</code> do not recover on their own within that compartment. They are forced to transition into isolation or treatment <code>I_T</code> at rate <code>eta</code> before they are allowed to recover.</li>
+</ul>
+<p><strong>3. Model Parameter Symbols and Meaning</strong></p>
+<ul>
+<li>lambda - Force of infection (Rate at which susceptible individuals become infected)</li>
+<li>epsilon - Progression/incubation rate (Rate at which exposed individuals become infectious)</li>
+<li>sigma - symptomatic proportion (Fraction of exposed individuals who become symptomatic)</li>
+<li>(1 - sigma) - Asymptomatic proportion (Fraction of exposed individuals who become asymptomatic)</li>
+<li>omega - Detection/ Progression rate (Rate at which asymptomatic individuals become confirmed infectious)</li>
+<li>eta - Treatment/Isolation (Rate at which confirmed infectious individuals enter treatment/isolation)</li>
+<li>gamma - Recovery rate (Rate at which treated individuals recover)</li>
+<li>delta - Asymptomatic recovery rate (Rate at which asymptomatic individuals recover)</li>
+</ul>
+<p><strong>4. Model ODE System</strong></p>
+<ul>
+<li><p><em>Susceptible Population:</em> dS/dt = -(lambda)S(I_A +I_C)/N</p></li>
+<li><p><em>Exposed Population</em> dE/dt = (lambda)S(I_A +I_C)/N - (epsilon)E</p></li>
+<li><p><em>Asymptomatic Infectious Population:</em><br>
+dI_A/dt = (1-sigma)(epsilon) E - [(omega) + (delta)]I_A</p></li>
+<li><p><em>Confirmed/Symptomatic Infectious Population:</em> dI_C/dt = (sigma)(epsilon)E + (omega)I_A - (eta)I_C</p></li>
+<li><p><em>Treated/Isolated Infectious Population:</em> dI_T/dt = (eta) I_C +(omega)I_A - (gamma)I_T</p></li>
+<li><p><em>Recovered Population:</em> dR/dt = (delta)I_A + (gamma) I_T</p></li>
+</ul>
+</section>
+<section id="model-implementation-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="model-implementation-in-r">Model Implementation in R</h3>
+<p><strong>1. Loading the required packages</strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span> <span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  deSolve,    <span class="co"># For solving ordinal differential equations</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ggplot2,    <span class="co"># For graphical work</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  reshape     <span class="co"># For converting the data format</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>2. Defining the Initial State</strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span>  <span class="co"># Total population</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span>  <span class="dv">10</span>  <span class="co"># small number of exposed individuals </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>I_A <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># small number of asymptomatic carriers </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>I_C <span class="ot">&lt;-</span> <span class="dv">2</span>  <span class="co"># small number of confirmed infectious </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>I_T <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># no one starts treatment/isolation</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="dv">0</span>    <span class="co"># no one starts recovered/immune yet</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> N <span class="sc">-</span> (E <span class="sc">+</span> I_A <span class="sc">+</span> I_C <span class="sc">+</span> I_T <span class="sc">+</span> R) <span class="co"># Calculation of susceptible population</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>initial_state <span class="ot">&lt;-</span> <span class="fu">c</span>( </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> S,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">E =</span> E, </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">I_A =</span> I_A, </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">I_C =</span> I_C, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">I_T =</span> I_T,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> R</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">365</span><span class="sc">*</span><span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>3. Setting the Parameters </strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="fl">0.33</span>,   <span class="co"># Rate at which susceptible individuals become infected</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">epsilon =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">50</span>,  <span class="co"># Rate at which exposed individuals become infectious</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.08</span>,    <span class="co"># Fraction of exposed individuals who become symptomatic</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculated using: 1/[average days to become confirmed]</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">omega =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> ,    <span class="co"># Rate at which asymptomatic individuals become confirmed infectious</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculated using: 1/[average days to enta treatment]</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">eta =</span> <span class="dv">1</span><span class="sc">/</span><span class="fl">1.5</span>,      <span class="co"># Rate at which confirmed infectious individuals enter treatment/isolation</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">gamma =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">15</span>,    <span class="co"># Rate at which treated individuals recover</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculated using; 1/[average days to recover  naturally]</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>     <span class="co"># Rate at which asymptomatic individuals recover</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># N/B: the following have been provided for this modeling session </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># S = Susceptible, E = Exposed, I = chronic infection, I = acute infection, I = treated, R = recovered.</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Some parameter values relating to an epidemic in an area "region A".</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ε (epsilon) = 1/50 days</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># σ (sigma) = 0.08</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># γ (gamma) = 1/15 days</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Transmission parameter β (beta) = 0.33 days</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>seiar_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state, parameters) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(state, parameters)), {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This prevents the numbers from overshooting and breaking the solver</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    N <span class="ot">&lt;-</span> S <span class="sc">+</span> E <span class="sc">+</span> I_A <span class="sc">+</span> I_C <span class="sc">+</span> I_T <span class="sc">+</span> R</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. CORRECTED TRANSMISSION (Divided by N)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This keeps the daily infection pool bounded safely between 0 and N</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    infectious_pressure <span class="ot">&lt;-</span> (lambda <span class="sc">*</span> S <span class="sc">*</span> (I_A <span class="sc">+</span> I_C)) <span class="sc">/</span> N</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. DIFFERENTIAL EQUATIONS</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    dS   <span class="ot">&lt;-</span> <span class="sc">-</span>infectious_pressure</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    dE   <span class="ot">&lt;-</span> infectious_pressure <span class="sc">-</span> (epsilon <span class="sc">*</span> E)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    dI_A <span class="ot">&lt;-</span> ((<span class="dv">1</span> <span class="sc">-</span> sigma) <span class="sc">*</span> epsilon <span class="sc">*</span> E) <span class="sc">-</span> (omega <span class="sc">*</span> I_A) <span class="sc">-</span> (delta <span class="sc">*</span> I_A)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    dI_C <span class="ot">&lt;-</span> (sigma <span class="sc">*</span> epsilon <span class="sc">*</span> E) <span class="sc">-</span> (eta <span class="sc">*</span> I_C)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    dI_T <span class="ot">&lt;-</span> (eta <span class="sc">*</span> I_C) <span class="sc">+</span> (omega <span class="sc">*</span> I_A) <span class="sc">-</span> (gamma <span class="sc">*</span> I_T)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    dR   <span class="ot">&lt;-</span> (delta <span class="sc">*</span> I_A) <span class="sc">+</span> (gamma <span class="sc">*</span> I_T)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dS, dE, dI_A, dI_C, dI_T, dR)))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>seiar_output <span class="ot">&lt;-</span>  <span class="fu">ode</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> initial_state,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> times,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">func =</span> seiar_model,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">parms =</span> parameters,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"lsoda"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>seiar_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(seiar_output)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seiar_output_long<span class="ot">&lt;-</span><span class="fu">melt</span>(<span class="at">data =</span> seiar_output, <span class="at">id.vars =</span> <span class="st">"time"</span>  )</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seiar_output_long)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  time variable    value
+1    0        S 99983.00
+2    1        S 99981.10
+3    2        S 99979.78
+4    3        S 99978.83
+5    4        S 99978.12
+6    5        S 99977.55</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seiar_output)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, S ), <span class="at">col=</span><span class="st">"blue"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, E ), <span class="at">col=</span><span class="st">"red"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, R ), <span class="at">col=</span><span class="st">"pink"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, I_A ), <span class="at">col=</span><span class="st">"orange"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, I_C ), <span class="at">col=</span> <span class="st">"purple"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, I_T ), <span class="at">col=</span> <span class="st">"steelblue"</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-6.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><a href="#" class="btn btn-outline-primary">Top</a> <a href="../" class="btn btn-outline-primary">Back</a></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
