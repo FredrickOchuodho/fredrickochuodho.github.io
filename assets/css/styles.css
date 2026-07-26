@@ -124,7 +124,6 @@ body.quarto-dark .project-card:hover {
   transition: all 0.3s ease;
 }
 
-
 .navbar-nav {
   margin: 0 auto;
   display: flex;
@@ -219,7 +218,6 @@ h1, h2 {
   text-shadow: 0 0 8px rgba(74, 209, 224, 0.4);
 }
 
-
 /* DARK MODE: Buttons */
 body.quarto-dark .btn,
 body.quarto-dark button,
@@ -232,10 +230,6 @@ body.quarto-dark .send-message-btn {
   color: #4ad1e0 !important;
   background-color: #2a2a2a !important;
   border: 1px solid #444 !important;
-  
-  
-  
-  
   
 }
 
