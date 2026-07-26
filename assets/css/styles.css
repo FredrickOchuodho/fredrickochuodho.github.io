@@ -232,6 +232,11 @@ body.quarto-dark .send-message-btn {
   color: #4ad1e0 !important;
   background-color: #2a2a2a !important;
   border: 1px solid #444 !important;
+  
+  
+  
+  
+  
 }
 
 .send-message-btn {
@@ -292,7 +297,7 @@ body.quarto-dark .btn-primary:hover {
 
 /* ===== GLASSMORPHISM DESIGN TOKENS ===== */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg: rgba(20, 184, 166, 0.005);
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --text-color: #1a1a1a;
@@ -485,4 +490,32 @@ body {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+
+
+/* Container Styles */
+.cover {
+  padding: 4rem 1rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  box-shadow: var(--glass-shadow);
+  color: var(--text-color);
+  margin: 10px 0;
+}
+
+.cover ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.cover li {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
