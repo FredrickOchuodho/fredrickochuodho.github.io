@@ -1,45 +1,58 @@
-#quarto-document-content,
-.quarto-layout-panel,
-.page-columns{
-  max-width: 100% !important;
-  width: 100% !important;
+/* =========================================
+   1. CORE VARIABLES & BRAND COLORS
+   ========================================= */
+:root {
+  /* Base Brand Colors */
+  --accent: #14b8a6;          /* Main Teal */
+  --accent-dark: #0d9488;     /* Darker Teal for hover */
+  --accent-soft: #e6f7fa;     /* Light tint */
+  
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(20, 184, 166, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  
+  /* Text & Layout */
+  --text-color: #1a1a1a;
+  --card-bg: #ffffff;
+  --card-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  
+  /* Fonts */
+  --font-body: "Segoe UI", sans-serif;
+  --font-heading: "Segoe UI", sans-serif;
 }
 
+/* Dark Mode Overrides */
+body.quarto-dark {
+  /* Brand Colors */
+  --accent: #4ad1e0;
+  --accent-dark: #2aa6b9;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(20, 20, 20, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  
+  /* Text & Cards */
+  --text-color: #eaeaea;
+  --card-bg: #444;
+  --card-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* =========================================
+   2. GLOBAL TYPOGRAPHY & LAYOUT
+   ========================================= */
 body {
-  font-family: "Segoe UI", sans-serif;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--text-color);
 }
 
 h1, h2, h3 {
   font-weight: 600;
-}
-
-.btn-primary {
-  border-radius: 8px;
-  background-color: var(--accent);
-  border-color: var(--accent);
-}
-
-.btn-primary:hover {
-  background-color: var(--accent-dark);
-  border-color: var(--accent-dark);
-}
-
-/* Outline buttons */
-.btn-outline-primary {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.btn-outline-primary:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
-
-.quarto-dark {
-  --accent: #4ad1e0;
-  --accent-dark: #2aa6b9;
+  color: #1f2d3d;
+  text-shadow: 0 0 8px rgba(58, 160, 255, 0.25);
+  margin-bottom: 1rem;
 }
 
 .quarto-dark h1,
@@ -48,152 +61,8 @@ h1, h2, h3 {
   color: #eaf6f8;
 }
 
-.quarto-dark a {
-  color: var(--accent);
-}
-
 .quarto-dark strong {
   color: var(--accent);
-}
-
-form input, form textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-
-#typed-text::after {
-  content: "|";
-  animation: blink 0.8s infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-#typed-text {
-  transition: opacity 0.2s ease-in-out;
-}
-
-
-.project-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
-  color: var(--text-color);
-}
-
-:root {
-  --card-bg: #ffffff;
-  --text-color: #1a1a1a;
-  --card-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-body.quarto-dark {
-  --card-bg: #444;
-  --text-color: #eaeaea;
-  --card-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
-
-body.quarto-dark .project-card:hover {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
-
-/* ===== SAAS NAVBAR STYLE ===== */
-
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.navbar-nav {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-
-.navbar-nav .nav-link {
-  position: relative;
-  font-weight: 500;
-  transition: all 0.25s ease;
-  padding: 8px 10px;
-}
-
-
-.navbar-nav .nav-link::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background:#14b8a6;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.navbar-nav .nav-link:hover::after {
-  width: 60%;
-}
-
-
-.navbar {
-  background: rgba(255, 255, 255, 0.75) !important;
-  backdrop-filter: blur(18px);
-}
-
-.quarto-dark .navbar {
-  background: rgba(20, 20, 20, 0.6) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-
-/* ===== HIDE TITLE TEXT, SHOW ONLY LOGO ===== */
-/* Hides the text "Viz4Impact" while keeping the logo visible */
-.navbar-brand .navbar-brand-text {
-  display: none !important;
-}
-
-/* Fallback: Hides any text span inside the brand that isn't the image */
-.navbar-brand > span:not(img) {
-  display: none !important;
-}
-
-/* Ensures the logo is sized correctly and vertically centered */
-.navbar-brand img {
-  max-height: 50px; /* Adjust this value if you need the logo larger or smaller */
-  width: auto;
-  display: block;
-}
-
-:root {
-  /* Base brand colors (safe on white) */
-  --accent: #2aa6b9;        /* soft teal-blue (main brand color) */
-  --accent-dark: #1b6f7a;   /* hover/darker */
-  --accent-soft: #e6f7fa;   /* light background tint */
-}
-
-h1, h2, h3 {
-  color: #1f2d3d; /* keep headings readable on white */
 }
 
 strong {
@@ -209,46 +78,145 @@ a:hover {
   color: var(--accent-dark);
 }
 
-h1, h2 {
-  text-shadow: 0 0 8px rgba(58, 160, 255, 0.25);
-}
-
-.quarto-dark {
-  --accent: #4ad1e0;
-  --accent-dark: #2aa6b9;
-}
-
-.quarto-dark h1,
-.quarto-dark h2,
-.quarto-dark h3 {
-  color: #eaf6f8;
-}
-
-.quarto-dark a {
-  color: var(--accent);
-}
-
-.quarto-dark strong {
-  color: var(--accent);
-}
-
 .quarto-dark a:hover {
   text-shadow: 0 0 8px rgba(74, 209, 224, 0.4);
 }
 
-/* DARK MODE: Buttons */
+#quarto-document-content,
+.quarto-layout-panel,
+.page-columns {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* =========================================
+   3. NAVBAR (Sticky, Glass, Logo Only)
+   ========================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.quarto-dark .navbar {
+  background: rgba(20, 20, 20, 0.6) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar-nav {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  align-items: flex-end;
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  padding: 8px 10px;
+  color: var(--text-color);
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 60%;
+}
+
+.navbar-nav .nav-link.active {
+  background: rgba(20, 184, 166, 0.15);
+  border-radius: 8px;
+  color: var(--accent) !important;
+}
+
+.navbar-brand .navbar-brand-text,
+.navbar-brand > span:not(img) {
+  display: none !important;
+}
+
+.navbar-brand img {
+  max-height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* =========================================
+   4. BUTTONS
+   ========================================= */
+.btn {
+  border-radius: 10px !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  border-radius: 8px;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.btn-outline-primary {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
 body.quarto-dark .btn,
 body.quarto-dark button,
 body.quarto-dark input[type="submit"] {
-  color: #4ad1e0 !important;
+  color: #eaeaea !important;
 }
 
-/* If you have a specific send button */
-body.quarto-dark .send-message-btn {
-  color: #4ad1e0 !important;
-  background-color: #2a2a2a !important;
-  border: 1px solid #444 !important;
-  
+body.quarto-dark .btn-primary {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #0b0b0b !important;
+}
+
+body.quarto-dark .btn-primary:hover {
+  background-color: var(--accent-dark) !important;
+  border-color: var(--accent-dark) !important;
+  color: white !important;
+}
+
+body.quarto-dark .btn-outline-primary {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+body.quarto-dark .btn-outline-primary:hover {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #0b0b0b !important;
 }
 
 .send-message-btn {
@@ -263,67 +231,150 @@ body.quarto-dark .send-message-btn {
   font-weight: 500;
 }
 
-.quarto-color-scheme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+body.quarto-dark .send-message-btn {
+  color: #4ad1e0 !important;
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
 }
 
-.quarto-color-scheme-toggle::after {
-  content: "Change theme";
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(20, 184, 166, 0.15);
-  color: #14b8a6;
+/* =========================================
+   5. CARDS & GLASSMORPHISM
+   ========================================= */
+.project-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  color: var(--text-color);
 }
 
-.btn {
-  border-radius: 10px !important;
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+body.quarto-dark .project-card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.g-col-6 {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+}
+
+.g-col-6:hover {
+  transform: translateY(-6px);
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
+}
+
+.g-col-6 h3 {
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.g-col-6 p {
+  opacity: 0.85;
+}
+
+.g-col-6 h3::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
+}
+
+.g-col-6 img {
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.contact-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px;
+  border-radius: 18px;
+  max-width: 100%;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+}
+
+/* =========================================
+   6. FORMS & INPUTS
+   ========================================= */
+form input,
+form textarea,
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-color);
+  backdrop-filter: blur(8px);
+  outline: none;
   transition: all 0.3s ease;
 }
 
-
-body.quarto-dark .btn,
-body.quarto-dark .btn-primary,
-body.quarto-dark .btn-outline-primary {
-  color: #eaeaea !important;
-  border-color: rgba(255,255,255,0.2) !important;
+.contact-card input, .contact-card textarea {
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
-/* Ensure primary buttons stay visible */
-body.quarto-dark .btn-primary {
-  background-color: #14b8a6 !important;
-  border-color: #14b8a6 !important;
-  color: #0b0b0b !important;
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
 }
 
-/* Hover visibility fix */
-body.quarto-dark .btn-primary:hover {
-  background-color: #0d9488 !important;
-  border-color: #0d9488 !important;
-  color: white !important;
+.contact-card input::placeholder,
+.contact-card textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
+  opacity: 1;
 }
 
-
-
-/* ===== GLASSMORPHISM DESIGN TOKENS ===== */
-:root {
-  --glass-bg: rgba(20, 184, 166, 0.005);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  --text-color: #1a1a1a;
-  --accent: #14b8a6;
+body.quarto-dark .contact-card input::placeholder,
+body.quarto-dark .contact-card textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
-body.quarto-dark {
-  --glass-bg: rgba(20, 20, 20, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-  --text-color: #eaeaea;
-  --accent: #14b8a6;
+/* =========================================
+   7. SPECIAL COMPONENTS
+   ========================================= */
+#typed-text {
+  transition: opacity 0.2s ease-in-out;
 }
 
+#typed-text::after {
+  content: "|";
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
 
 .skill-pill {
   display: inline-block;
@@ -343,171 +394,6 @@ body.quarto-dark {
   background: rgba(20, 184, 166, 0.2);
 }
 
-
-h1 img, h2 img, h3 img {
-  vertical-align: middle;
-  margin-right: 8px;
-  display: inline-block;
-}
-
-
-/* GRID SPACING */
-.grid {
-  gap: 10px;
-}
-
-/* GLASS FEATURE CARDS */
-.g-col-6 {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 16px;
-  padding: 18px;
-  transition: all 0.3s ease;
-}
-
-/* HOVER EFFECT */
-.g-col-6:hover {
-  transform: translateY(-6px);
-  border-color: rgba(20, 184, 166, 0.3);
-  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
-}
-
-/* ICON STYLING */
-.g-col-6 img {
-  margin-bottom: 10px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-}
-
-
-/* SERVICES GRID CARDS */
-.g-col-6 {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 16px;
-  padding: 20px;
-  transition: all 0.3s ease;
-}
-
-/* HOVER EFFECT (important for "lively feel") */
-.g-col-6:hover {
-  transform: translateY(-6px);
-  border-color: rgba(20, 184, 166, 0.35);
-  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
-}
-
-/* ICON STYLING */
-.g-col-6 h3 {
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-
-.g-col-6 p {
-  opacity: 0.85;
-}
-
-/* OPTIONAL: ICON SPACING LOOK */
-.g-col-6 h3::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  vertical-align: middle;
-}
-
-
-
-/* CONTACT WRAPPER */
-.contact-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 24px;
-  border-radius: 18px;
-  max-width: 100%;
-  margin: 0 auto;
-  margin-right: auto;
-  transition: all 0.3s ease;
-}
-
-.contact-card:hover {
-  transform: translateY(-4px);
-}
-
-/* INPUT FIELDS */
-.contact-card input,
-.contact-card textarea {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.06);
-  color: var(--text-color);
-  backdrop-filter: blur(8px);
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-/* FOCUS STATE (VERY IMPORTANT UX FIX) */
-.contact-card input:focus,
-.contact-card textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-}
-
-/* TEXTAREA SIZE */
-.contact-card textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-/* LIGHT MODE placeholder (fix visibility) */
-.contact-card input::placeholder,
-.contact-card textarea::placeholder {
-  color: rgba(0, 0, 0, 0.4) !important;
-  opacity: 1;
-}
-
-/* DARK MODE placeholder */
-body.quarto-dark .contact-card input::placeholder,
-body.quarto-dark .contact-card textarea::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
-  opacity: 1;
-}
-
-body {
-  font-family: Cambria, "Times New Roman", Times, serif;
-  line-height: 1.6;
-}
-
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-
-/* Container Styles */
 .cover {
   padding: 4rem 1rem;
   background: var(--glass-bg);
@@ -530,4 +416,104 @@ body {
   margin-bottom: 12px;
   font-size: 1.1rem;
   line-height: 1.5;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid {
+  gap: 10px;
+}
+
+h1 img, h2 img, h3 img {
+  vertical-align: middle;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.quarto-color-scheme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quarto-color-scheme-toggle::after {
+  content: "Change theme";
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.15);
+  color: #14b8a6;
+}
+
+
+
+/* =========================================
+   6. FORMS & INPUTS (FIXED FOR DARK MODE)
+   ========================================= */
+
+/* Base Input Styles (Light Mode) */
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc; /* Visible border in light mode */
+  background: #ffffff;    /* White background in light mode */
+  color: #1a1a1a;         /* Dark text */
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Placeholder in Light Mode */
+.contact-card input::placeholder,
+.contact-card textarea::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+/* Focus State (Both Modes) */
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+  background: #fff; /* Keep white on focus in light mode */
+}
+
+/* =========================================
+   DARK MODE OVERRIDES FOR FORMS
+   ========================================= */
+
+/* Dark Mode Inputs: Dark Background, Light Text */
+.quarto-dark .contact-card input,
+.quarto-dark .contact-card textarea {
+  background: rgba(30, 30, 30, 0.8); /* Dark grey background */
+  color: #eaeaea;                     /* Light text */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+/* Dark Mode Placeholders: Lighter grey */
+.quarto-dark .contact-card input::placeholder,
+.quarto-dark .contact-card textarea::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+/* Dark Mode Focus: Keep the accent glow */
+.quarto-dark .contact-card input:focus,
+.quarto-dark .contact-card textarea:focus {
+  background: rgba(40, 40, 40, 0.9); /* Slightly lighter on focus */
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(74, 209, 224, 0.2); /* Lighter accent glow for dark mode */
 }
