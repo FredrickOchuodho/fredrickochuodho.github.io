@@ -517,3 +517,68 @@ h1 img, h2 img, h3 img {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(74, 209, 224, 0.2); /* Lighter accent glow for dark mode */
 }
+
+
+
+/* Define base variables for Light Mode (default) */
+:root {
+  --btn-orange-base: #ff6b00;
+  --btn-orange-hover: #ff8533;
+  --btn-bg-hover: rgba(255, 107, 0, 0.08);
+  --btn-glow: 0 0 12px rgba(255, 107, 0, 0.5);
+  --btn-focus-ring: rgba(255, 107, 0, 0.4);
+}
+
+/* Override variables for Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Brighter base for better contrast on dark backgrounds */
+    --btn-orange-base: #ff7f1a; 
+    --btn-orange-hover: #ffa657;
+    --btn-bg-hover: rgba(255, 127, 26, 0.15);
+    /* Stronger glow for dark mode visibility */
+    --btn-glow: 0 0 16px rgba(255, 127, 26, 0.7);
+    --btn-focus-ring: rgba(255, 127, 26, 0.6);
+  }
+}
+
+/* Secondary Button Styles */
+.btn-secondary {
+  /* Apply variables */
+  color: var(--btn-orange-base);
+  border: transparent;
+  background-color: rgba(255, 127, 26, 0.15);
+  
+  /* Layout & Typography */
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  /* Transitions */
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+/* Hover State */
+.btn-secondary:hover {
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-orange-hover);
+  border-color: var(--btn-orange-hover);
+  box-shadow: var(--btn-glow);
+}
+
+/* Active/Click State */
+.btn-secondary:active {
+  background-color: var(--btn-bg-hover);
+  opacity: 0.8;
+  transform: translateY(1px);
+  box-shadow: 0 0 8px rgba(255, 127, 26, 0.5); /* Slightly dimmer glow on press */
+}
+
+/* Focus State (Accessibility) */
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-focus-ring), var(--btn-glow);
+}
