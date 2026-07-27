@@ -161,10 +161,28 @@ body.quarto-dark .project-card:hover {
   backdrop-filter: blur(18px);
 }
 
-
 .quarto-dark .navbar {
   background: rgba(20, 20, 20, 0.6) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ===== HIDE TITLE TEXT, SHOW ONLY LOGO ===== */
+/* Hides the text "Viz4Impact" while keeping the logo visible */
+.navbar-brand .navbar-brand-text {
+  display: none !important;
+}
+
+/* Fallback: Hides any text span inside the brand that isn't the image */
+.navbar-brand > span:not(img) {
+  display: none !important;
+}
+
+/* Ensures the logo is sized correctly and vertically centered */
+.navbar-brand img {
+  max-height: 50px; /* Adjust this value if you need the logo larger or smaller */
+  width: auto;
+  display: block;
 }
 
 :root {
