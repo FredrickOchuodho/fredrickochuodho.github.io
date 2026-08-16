@@ -25,7 +25,7 @@
     "href": "projects/index.html",
     "title": "Case Studies",
     "section": "",
-    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nInfectious Disease Modeling\n This is a mathematical simulations to predict pathogen spread and evaluate control strategies.\nTools: R\nView\n\n\n\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nTools: MSSQL, MySQL, PostgreSQL\nView\n\n\n\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nTools: Power Automate, Power BI\nView\n\n\nShiny Dashboards in R\nInteractive web-based dashboards built with R Shiny.\nTools: R, R-shiny\nView"
+    "text": "A showcase of dashboards, analysis, automation, and M&E systems.\n\n\nHealth Dashboard\nPower BI reporting system supporting global radiology operations.\nTools: Power BI, SQL\nView\n\n\nInfectious Disease Modeling\n This is a mathematical simulations to predict pathogen spread and evaluate control strategies.\nTools: R\nView\n\n\n\n\n\nSurvey Analysis\nR-based exploratory data analysis of field surveys.\nTools: R, ggplot2\nView\n\n\nSQL Reporting Pipeline\nAutomated data cleaning and KPI generation system.\nTools: MSSQL, MySQL, PostgreSQL\nView\n\n\n\n\n\nPower Automate Reporting\nAutomated email reporting workflows using Power BI outputs.\nTools: Power Automate, Power BI\nView\n\n\nNEISS Injury Surveillance Dashboard\nInteractive web-based dashboards built with R Shiny.\n\nTools: R, R-shiny\nView"
   },
   {
     "objectID": "index.html",
@@ -53,7 +53,7 @@
     "href": "projects/shiny_dashboard/index.html",
     "title": "NEISS Injury Surveillance Dashboard",
     "section": "",
-    "text": "Explore injury trends by age and sex using the interactive tool below.\n\n \n\nTop Back"
+    "text": "Explore injury trends by age and sex using the interactive tool below.\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nTip: If the dashboard takes a moment to load, please wait ~15 seconds for it to “wake up.”"
   },
   {
     "objectID": "projects/sql_pipeline/pipeline.html#what-is-a-data-pipeline",
