@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Fredrick Ochuodho">
+<meta name="dcterms.date" content="2026-10-04">
 
 <title>SQL Data Pipeline – Viz4Impact</title>
 <style>
@@ -22,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -309,13 +346,26 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">SQL Data Pipeline</h1>
+<p class="subtitle lead">Building Robust Data Architecture</p>
 </div>
 
 
 
 <div class="quarto-title-meta column-page">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fredrick Ochuodho </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 4, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -325,11 +375,124 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<iframe src="pipeline.html" width="100%" height="600px" frameborder="0" allowfullscreen="">
-</iframe>
-<p><a href="#" class="btn btn-outline-primary">Top</a> <a href="../" class="btn btn-outline-primary">Back</a></p>
+<p>The Modern SQL pipelines generally follow one of the following two patterns:</p>
+<p><strong>1. ETL [Extract, Transform, Load]</strong></p>
+<p>Traditional method that transforms data before saving which is better for strict privacy regulations.</p>
+<p><strong>2. ELT [Extract, Load, Transform]</strong></p>
+<p>This is a modern cloud method in which data is being transformed inside the warehouse and is a highly scalable with SQL.</p>
+<section id="step-by-step-guide" class="level3">
+<h3 class="anchored" data-anchor-id="step-by-step-guide">Step by Step Guide</h3>
+<p><strong>Step 1: Data Extraction</strong></p>
+<p>Data originates from multiple distinct sources:</p>
+<ul>
+<li><p>Production databases (e.g., PostgreSQL, MySQL)</p></li>
+<li><p>Application APIs (e.g., Salesforce, Stripe)</p></li>
+<li><p>Flat files (e.g., CSV, JSON logs)</p></li>
+<li><p>Goal: Move this raw data into a central “Staging Area” with minimal changes.</p></li>
+</ul>
+<p><strong>Step 2: Data Transformation with SQL</strong></p>
+<p>This is where SQL shines. Raw data is converted into clean models.</p>
+<ul>
+<li><p>Deduplication: Removing identical records.</p></li>
+<li><p>Type Casting: Converting strings to dates or integers.</p></li>
+<li><p>Aggregations: Calculating daily totals or averages.</p></li>
+<li><p>Business Logic: Standardising naming conventions.</p></li>
+</ul>
+<p>Transformation Example (SQL)</p>
+<p><strong>Cleaning raw e-commerce orders</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> raw_data <span class="kw">AS</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        order_id,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        user_id,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">LOWER</span>(status) <span class="kw">AS</span> order_status,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        created_at,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">COALESCE</span>(amount, <span class="dv">0</span>) <span class="kw">AS</span> revenue</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> staging.raw_orders</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> order_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cleaned <span class="kw">AS</span> (</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        order_id,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        user_id,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        order_status,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">CAST</span>(created_at <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> order_date,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        revenue</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> raw_data</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> analytics.clean_orders</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cleaned;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Data Quality Testing</strong></p>
+<p>Bad data breaks downstream dashboards. Pipelines must validate data automatically.</p>
+<ul>
+<li><p>Primary Key Tests: Ensuring IDs are unique and not null.</p></li>
+<li><p>Relationship Tests: Verifying a foreign key exists in the parent table.</p></li>
+<li><p>Accepted Value Tests: Restricting columns to expected statuses (e.g., completed, pending).</p></li>
+<li><p>Tools: Implemented natively using dbt tests, Great Expectations, or custom SQL assertions.</p></li>
+</ul>
+<p><strong>Testing Implementation (SQL)</strong></p>
+<p>You can write tests as SQL queries. A test passes if it returns zero rows.</p>
+<p><em>Test: Ensure order_id is completely unique</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    order_id, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> analytics.clean_orders</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> order_id</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>Test: Ensure revenue is never a negative number</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> analytics.clean_orders </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> revenue <span class="op">&lt;</span> <span class="dv">0</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Full Refresh vs.&nbsp;Incremental Loading</strong></p>
+<p>How do we update our tables every day?</p>
+<ul>
+<li><p>Full Refresh: Rebuilds the entire destination table from scratch. Safe, simple, but slow and expensive for massive datasets.</p></li>
+<li><p>Incremental Load: Only processes data that has changed since the last pipeline run. Fast and cost-efficient, but requires careful code logic.</p></li>
+<li><p>Incremental Strategy: Append-Only [Best for immutable log data like page clicks or transactional history.]</p></li>
+</ul>
+<p>– Find the latest record we already processed</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> last_update <span class="dt">TIMESTAMP</span>;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> last_update <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(created_at) <span class="kw">FROM</span> analytics.clickstream);</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert only new rows generated after that timestamp</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> analytics.clickstream</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> click_id, user_id, page_url, created_at</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> staging.raw_clicks</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> created_at <span class="op">&gt;</span> last_update;</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Incremental Strategy: Upsert (Merge)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Best for mutable data like user profiles or order statuses that change over time.</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- MERGE updates existing records and inserts brand new ones</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">MERGE</span> <span class="kw">INTO</span> analytics.customers target</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">USING</span> staging.raw_customers <span class="kw">source</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> target.customer_id <span class="op">=</span> <span class="kw">source</span>.customer_id</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="cf">WHEN</span> MATCHED <span class="kw">AND</span> target.updated_at <span class="op">&lt;</span> <span class="kw">source</span>.updated_at <span class="cf">THEN</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">UPDATE</span> <span class="kw">SET</span> target.email <span class="op">=</span> <span class="kw">source</span>.email, target.updated_at <span class="op">=</span> <span class="kw">source</span>.updated_at</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="cf">WHEN</span> <span class="kw">NOT</span> MATCHED <span class="cf">THEN</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INSERT</span> (customer_id, email, updated_at) </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">VALUES</span> (<span class="kw">source</span>.customer_id, <span class="kw">source</span>.email, <span class="kw">source</span>.updated_at);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Step 3: Loading into Data Models</strong></p>
+<p>Cleaned data is structured into schemas optimized for quick reporting.</p>
+<p>Fact Tables: Contain measurable, quantitative data (e.g., sales, clicks).</p>
+<p>Dimension Tables: Contain descriptive attributes (e.g., customer details, product categories).</p>
+<p>This structure is commonly known as a Star Schema.</p>
+<p><strong>Step 4: Pipeline Orchestration</strong></p>
+<p>Pipelines must run automatically, reliably, and in the correct order.</p>
+<p>Scheduling: Running tasks hourly, daily, or weekly.</p>
+<p>Dependency Management: Ensuring Table B only updates after Table A finishes.</p>
+<p>Tools: Apache Airflow, Prefect, or dbt (Data Build Tool).</p>
+<p><strong>Summary of Benefits</strong></p>
+<p>Why build your pipeline around SQL?</p>
+<p>Universal Language: Almost all data professionals know SQL.</p>
+<p>Performance: Modern cloud warehouses process SQL queries fast.</p>
+<p>Version Control: SQL code can be easily tracked in Git.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
